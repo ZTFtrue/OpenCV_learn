@@ -22,6 +22,7 @@
 
 using namespace std;
 using namespace cv;
+using namespace my_cv;
 //using namespace cv::xfeatures2d;
 
 class LessonA2FeaturesFramework {

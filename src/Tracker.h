@@ -19,37 +19,43 @@
 #include <iostream>
 #include <iomanip>
 #include "MyUtils.h" // Drawing and printing functions
-#include "stats.h" // Stats structure definition
+#include "stats.h"	 // Stats structure definition
 
 using namespace cv;
 using namespace std;
 
-const double ransac_thresh = 2.5f; // RANSAC inlier threshold
-const int bb_min_inliers = 100; // Minimal number of inliers to draw bounding box
-const double nn_match_ratio = 0.8f; // Nearest-neighbour matching ratio
+namespace my_cv
+{
+	const double ransac_thresh = 2.5f;	// RANSAC inlier threshold
+	const int bb_min_inliers = 100;		// Minimal number of inliers to draw bounding box
+	const double nn_match_ratio = 0.8f; // Nearest-neighbour matching ratio
 
-class Tracker {
+	class Tracker
+	{
 
-public:
-	Tracker(Ptr<Feature2D> _detector, Ptr<DescriptorMatcher> _matcher) :
-			detector(_detector), matcher(_matcher) {
-	}
-	void setFirstFrame(const cv::Mat frame, vector<Point2f> bb, string title,
-			Stats& stats);
-	Mat process(const Mat frame, Stats& stats);
-	Ptr<Feature2D> getDetector() {
-		return detector;
-	}
-	Tracker();
-	virtual ~Tracker();
-protected:
-    MyUtils myUtils;
-	Ptr<Feature2D> detector;
-	Ptr<DescriptorMatcher> matcher;
-	Mat first_frame, first_desc;
-	vector<KeyPoint> first_kp;
-	vector<Point2f> object_bb;
+	public:
+		Tracker(Ptr<Feature2D> _detector, Ptr<DescriptorMatcher> _matcher) : detector(_detector), matcher(_matcher)
+		{
+		}
+		void setFirstFrame(const cv::Mat frame, vector<Point2f> bb, string title,
+						   Stats &stats);
+		Mat process(const Mat frame, Stats &stats);
+		Ptr<Feature2D> getDetector()
+		{
+			return detector;
+		}
+		Tracker();
+		virtual ~Tracker();
 
-};
+	protected:
+		MyUtils myUtils;
+		Ptr<Feature2D> detector;
+		Ptr<DescriptorMatcher> matcher;
+		Mat first_frame, first_desc;
+		vector<KeyPoint> first_kp;
+		vector<Point2f> object_bb;
+	};
+
+}
 
 #endif /* SRC_TRACKER_H_ */

@@ -7,6 +7,8 @@
 
 #include "LessonA2FeaturesFramework.h"
 
+using namespace my_cv;
+
 LessonA2FeaturesFramework::LessonA2FeaturesFramework() {
 
 }
@@ -33,8 +35,8 @@ int LessonA2FeaturesFramework::AKAZEandORBplanar() {
 	Ptr<ORB> orb = ORB::create();
 	Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create(
 			"BruteForce-Hamming");
-	Tracker akaze_tracker(akaze, matcher);
-	Tracker orb_tracker(orb, matcher);
+	my_cv::Tracker akaze_tracker(akaze, matcher);
+	my_cv::Tracker orb_tracker(orb, matcher);
 	Mat frame;
 	namedWindow(video_name, WINDOW_NORMAL);
 	cout << "\nPress any key to stop the video and select a bounding box"
